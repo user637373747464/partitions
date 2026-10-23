@@ -1,0 +1,137 @@
+/* Volume 1 — Chapitre 8 : Premières mélodies */
+Contenu.chapitre('v1', {
+  id: 'v1c8', titre: 'Chapitre 8 · Premières mélodies',
+  lecons: [
+    {
+      id: 'v1-37-ode', titre: 'Ode à la joie', duree: 35,
+      objectifs: ['Lire une vraie mélodie complète, notes et rythmes ensemble.', 'Analyser une mélodie : phrases, notes répétées, degrés conjoints, ambitus.', 'La jouer à la main droite avec le bon doigté.'],
+      blocs: [
+        { t: 'p', x: 'C’est le moment d’assembler tout ce que tu as appris. Voici le thème de l’**Ode à la joie**, extrait du dernier mouvement de la **9ᵉ symphonie** de **Beethoven** (1824). Il est construit presque uniquement sur des degrés conjoints : parfait pour lire.' },
+        { t: 'score', clef: 'sol', mes: '4/4', s: 'e4:q e4:q f4:q g4:q | g4:q f4:q e4:q d4:q | c4:q c4:q d4:q e4:q | e4:q. d4:e d4:h || e4:q e4:q f4:q g4:q | g4:q f4:q e4:q d4:q | c4:q c4:q d4:q e4:q | d4:q. c4:e c4:h |]', noms: true, bpm: 100, legende: 'Ode à la joie (Beethoven). Tempo environ ♩ = 100.' },
+        { t: 'h', x: 'Étape 1 : observer avant de jouer' },
+        { t: 'liste', num: true, x: [
+          '**La clé et l’armure** : clé de sol, pas d’altération.',
+          '**Le chiffrage** : 4/4, quatre temps par mesure.',
+          '**La première note** : mi (sur la 1re ligne).',
+          '**Le profil** : la mélodie monte, descend, monte (une vague).',
+          '**Les rythmes** : des noires partout, sauf aux mesures 4 et 8 : noire pointée + croche + blanche.',
+        ] },
+        { t: 'h', x: 'Étape 2 : repérer la structure' },
+        { t: 'p', x: 'Les mesures 5 à 8 reprennent **presque exactement** les mesures 1 à 4 : seule la **fin** change (mesure 4 : « mi. ré ré », mesure 8 : « ré. do do »). Cette organisation en deux phrases presque jumelles est très courante. La première phrase finit sur un **ré** (en suspens), la seconde sur un **do** (de repos) : l’une pose une question, l’autre y répond.' },
+        { t: 'rem', tag: 'Vocabulaire', x: 'L’**ambitus** est l’étendue d’une mélodie, de sa note la plus grave à la plus aiguë. Ici : du **do** au **sol**, soit une **quinte** (5 notes). La mélodie reste donc dans la « position » de cinq doigts.' },
+        { t: 'h', x: 'Étape 3 : le doigté' },
+        { t: 'p', x: 'Place ta main droite avec le **pouce sur le do** (do 3), puis un doigt par touche : 1 = do, 2 = ré, 3 = mi, 4 = fa, 5 = sol. Le doigté de la mélodie, mesure par mesure :' },
+        { t: 'tableau', entete: ['Mesure', 'Notes', 'Doigté'], lignes: [['1', 'mi mi fa sol', '3 3 4 5'], ['2', 'sol fa mi ré', '5 4 3 2'], ['3', 'do do ré mi', '1 1 2 3'], ['4', 'mi. ré ré', '3 2 2']] },
+        { t: 'clavier', de: 60, a: 72, noms: 'tous', marque: ['c4', 'd4', 'e4', 'f4', 'g4'], jouer: ['e4', 'e4', 'f4', 'g4', 'g4', 'f4', 'e4', 'd4'], legende: 'La position de cinq doigts : do ré mi fa sol, pouce sur do.' },
+        { t: 'h', x: 'Étape 4 : le rythme seul' },
+        { t: 'rythme', titre: 'Le rythme de l’Ode à la joie', s: 'b4:q b4:q b4:q b4:q | b4:q b4:q b4:q b4:q | b4:q b4:q b4:q b4:q | b4:q. b4:e b4:h |]', mes: '4/4', bpm: 80, consigne: 'Tape le rythme de la phrase. Attention à la 4ᵉ mesure : noire pointée, croche, blanche.' },
+        { t: 'h', x: 'Étape 5 : jouer lentement, puis augmenter' },
+        { t: 'p', x: 'Joue **très lentement** (♩ = 60), en comptant à voix haute. Quand tu ne fais plus d’erreur sur deux passages d’affilée, accélère légèrement. La **régularité** vaut mieux que la vitesse.' },
+        { t: 'qcm', titre: 'Vérifie', questions: [
+          { q: 'Quelle est la première note de l’Ode à la joie (cette version) ?', choix: ['do', 'ré', 'mi', 'sol'], bonne: 2, expl: 'Mi : c’est la note de la 1re ligne.' },
+          { q: 'Qu’est-ce que l’ambitus d’une mélodie ?', choix: ['Sa vitesse', 'L’étendue de la note la plus grave à la plus aiguë', 'Sa nuance', 'Son rythme'], bonne: 1, expl: 'Ici de do à sol : une quinte.' },
+          { q: 'Dans quelle mesure le rythme change-t-il (noire pointée + croche + blanche) ?', choix: ['La 1re', 'La 3e', 'La 4e', 'Aucune'], bonne: 2, expl: 'La 4e mesure (et la 8e).' },
+          { q: 'Avec le pouce sur do, quel doigt joue le sol ?', choix: ['1', '3', '4', '5'], bonne: 3, expl: '1=do, 2=ré, 3=mi, 4=fa, 5=sol.' },
+        ] },
+      ],
+      videos: [{ titre: 'Jouer l’Ode à la joie au piano', rech: 'ode à la joie piano facile débutant main droite' }],
+      cartes: [
+        { cat: 'Mélodies', q: 'Qui a composé l’Ode à la joie (thème) ?', r: 'Beethoven, dans la 9e symphonie (1824).' },
+        { cat: 'Mélodies', q: 'Qu’est-ce que l’ambitus ?', r: 'L’étendue d’une mélodie : de la note la plus grave à la plus aiguë.' },
+        { cat: 'Mélodies', q: 'Position de cinq doigts en do : quelle note pour chaque doigt ?', r: '1 do, 2 ré, 3 mi, 4 fa, 5 sol.' },
+      ],
+    },
+
+    {
+      id: 'v1-38-chansons', titre: 'Au clair de la lune et Frère Jacques', duree: 35,
+      objectifs: ['Lire deux mélodies traditionnelles à la main droite.', 'Repérer les motifs répétés et la forme des phrases.', 'Jouer les deux mélodies en respectant les durées.'],
+      blocs: [
+        { t: 'p', x: 'Deux chansons que tu connais déjà par cœur. Tu **sais** comment elles sonnent : c’est un avantage, car tu peux vérifier à l’oreille si tu lis juste. Ce sont des mélodies **traditionnelles** françaises, dont les auteurs sont inconnus.' },
+        { t: 'h', x: 'Au clair de la lune' },
+        { t: 'score', clef: 'sol', mes: '4/4', s: 'c4:q c4:q c4:q d4:q | e4:h d4:h | c4:q e4:q d4:q d4:q | c4:w |]', noms: true, bpm: 88, legende: 'Au clair de la lune (début).' },
+        { t: 'liste', x: ['**Début** : trois fois la même note (do), puis un petit mouvement (ré, mi).', '**Rythme** : noires, puis deux blanches (mesure 2), noires, enfin une ronde.', '**Doigté** : main droite, pouce sur do : 1 1 1 2 | 3 2 | 1 3 2 2 | 1.'] },
+        { t: 'h', x: 'Frère Jacques' },
+        { t: 'score', clef: 'sol', mes: '4/4', s: 'c4:q d4:q e4:q c4:q | c4:q d4:q e4:q c4:q | e4:q f4:q g4:h | e4:q f4:q g4:h | g4:e a4:e g4:e f4:e e4:q c4:q | g4:e a4:e g4:e f4:e e4:q c4:q | c4:q g3:q c4:h | c4:q g3:q c4:h |]', noms: true, bpm: 100, legende: 'Frère Jacques. Chaque phrase est jouée deux fois (le texte dit « Dormez-vous ? » deux fois, etc.).' },
+        { t: 'p', x: 'Observe la forme : **A A B B C C D D**. Chaque phrase est répétée deux fois. Quand la 1re phrase est jouée, tu peux **déjà savoir** la 2ᵉ ! La musique, comme le langage, répète pour se faire comprendre.' },
+        { t: 'rem', tag: 'Tour de main', x: 'Pour mémoriser, repère les **motifs** : « do ré mi do » (mes. 1-2), « mi fa sol » (mes. 3-4), « sol la sol fa mi do » en croches (mes. 5-6), « do sol do » (mes. 7-8). Quatre petits motifs, une chanson entière.' },
+        { t: 'h', x: 'Pour la main gauche : même mélodie, une octave plus bas' },
+        { t: 'score', clef: 'fa', mes: '4/4', s: 'c3:q d3:q e3:q c3:q | c3:q d3:q e3:q c3:q | e3:q f3:q g3:h | e3:q f3:q g3:h |]', noms: true, legende: 'Frère Jacques (début), une octave plus bas, en clé de fa. Tu lis la même mélodie avec l’autre clé !' },
+        { t: 'rythme', titre: 'Rythme de Frère Jacques', s: 'b4:q b4:q b4:q b4:q | b4:q b4:q b4:q b4:q | b4:q b4:q b4:h | b4:q b4:q b4:h |]', mes: '4/4', bpm: 84, consigne: 'Chaque mesure : noires ou blanche.' },
+        { t: 'qcm', titre: 'Vérifie', questions: [
+          { q: 'Quelle est la forme de Frère Jacques (phrases) ?', choix: ['A B C D', 'A A B B C C D D', 'A B A B', 'A A A A'], bonne: 1, expl: 'Chaque phrase est répétée deux fois.' },
+          { q: 'Dans Au clair de la lune, combien de fois joue-t-on le do au début ?', choix: ['1', '2', '3', '4'], bonne: 2, expl: 'Trois do, puis ré.' },
+          { q: 'Frère Jacques à la main gauche, une octave plus bas, se lit avec quelle clé ?', choix: ['Sol', 'Fa', 'Ut', 'Aucune'], bonne: 1, expl: 'Clé de fa, puisque la mélodie est plus grave.' },
+        ] },
+      ],
+      videos: [{ titre: 'Frère Jacques au piano', rech: 'frère jacques piano facile tutoriel débutant' }],
+      cartes: [
+        { cat: 'Mélodies', q: 'Forme de Frère Jacques :', r: 'A A B B C C D D (chaque phrase jouée deux fois).' },
+        { cat: 'Mélodies', q: 'Les trois premières notes de « Au clair de la lune » :', r: 'do do do (puis ré).' },
+        { cat: 'Mélodies', q: 'Le premier motif de Frère Jacques :', r: 'do ré mi do.' },
+      ],
+    },
+
+    {
+      id: 'v1-39-menuet', titre: 'Menuet en sol : une armure, trois temps', duree: 35,
+      objectifs: ['Lire un morceau avec armure (sol majeur : fa♯).', 'Lire en 3/4 avec noires et croches.', 'Jouer un extrait en changeant de position.'],
+      blocs: [
+        { t: 'p', x: 'Voici le début du célèbre **Menuet en sol majeur**, longtemps attribué à **J.-S. Bach** mais composé par **Christian Petzold** (vers 1725). Il rassemble plusieurs choses nouvelles : une **armure** d’un dièse, une **mesure à 3 temps**, des **croches** en rafales.' },
+        { t: 'score', clef: 'sol', arm: 1, mes: '3/4', s: 'd5:q g4:e a4:e b4:e c5:e | d5:q g4:q g4:q | e5:q c5:e d5:e e5:e f5:e | g5:q g4:q g4:q |]', noms: true, bpm: 112, legende: 'Menuet en sol (début). Armure : un dièse (fa♯), tonalité de sol majeur.' },
+        { t: 'h', x: 'Analyse' },
+        { t: 'liste', num: true, x: [
+          '**Armure** : un dièse, donc tous les **fa** sont **fa♯** (le fa♯ de la 3ᵉ mesure s’écrit donc sans signe devant la note).',
+          '**Chiffrage** : 3/4. Trois noires par mesure, la 1re plus forte (menuet : danse à trois temps).',
+          '**Main droite seule** : le morceau commence haut (ré 4), descend à sol 3, puis remonte par degrés conjoints.',
+          '**Rythme** : noire + 4 croches ; noire + 2 noires ; noire + 4 croches ; noire + 2 noires.',
+        ] },
+        { t: 'rem', tag: 'Lecture avec armure', x: 'Avant de jouer, **lis l’armure** et dis-toi : « tous les fa sont dièse ». Passe en revue la partition avec un crayon pour entourer les fa.' },
+        { t: 'h', x: 'Changer de position' },
+        { t: 'p', x: 'Le début demande de sauter du **ré aigu** (ré 4) au **sol grave** (sol 3) : un saut de **quinte**. Ensuite, la main se repositionne autour du sol (sol–la–si–do–ré). Ces changements de position sont plus faciles si tu **regardes d’abord la portée** (où va la mélodie), puis le clavier seulement pour vérifier.' },
+        { t: 'clavier', de: 67, a: 86, noms: 'tous', marque: ['d5', 'g4', 'a4', 'b4', 'c5'], jouer: ['d5', 'g4', 'a4', 'b4', 'c5', 'd5', 'g4', 'g4'], legende: 'Première mesure : ré, sol, la, si, do ; deuxième : ré, sol, sol.' },
+        { t: 'rythme', titre: 'Rythme du menuet', s: 'b4:q b4:e b4:e b4:e b4:e | b4:q b4:q b4:q | b4:q b4:e b4:e b4:e b4:e | b4:q b4:q b4:q |]', mes: '3/4', bpm: 84, consigne: 'Trois temps par mesure : noire puis quatre croches ; noire noire noire.' },
+        { t: 'qcm', titre: 'Vérifie', questions: [
+          { q: 'Combien de dièses à l’armure du Menuet en sol ?', choix: ['0', '1', '2', '3'], bonne: 1, expl: 'Un dièse : fa♯.' },
+          { q: 'Dans la 3e mesure, le fa est…', choix: ['naturel', 'dièse (à cause de l’armure)', 'bémol', 'double dièse'], bonne: 1, expl: 'L’armure rend tous les fa dièse.' },
+          { q: 'Combien de temps dans une mesure à 3/4 ?', choix: ['2', '3', '4', '6'], bonne: 1, expl: 'Trois noires.' },
+          { q: 'Qui a vraiment composé le Menuet en sol ?', choix: ['J.-S. Bach', 'Christian Petzold', 'Mozart', 'Haydn'], bonne: 1, expl: 'Petzold, longtemps attribué à Bach.' },
+        ] },
+      ],
+      videos: [{ titre: 'Menuet en sol (Petzold)', rech: 'menuet en sol Petzold piano débutant tutoriel' }],
+      cartes: [
+        { cat: 'Mélodies', q: 'Qui a composé le Menuet en sol (longtemps attribué à Bach) ?', r: 'Christian Petzold (vers 1725).' },
+        { cat: 'Mélodies', q: 'Armure du Menuet en sol :', r: 'Un dièse : fa♯ (sol majeur).' },
+        { cat: 'Mélodies', q: 'Mesure du Menuet :', r: '3/4 : trois temps.' },
+      ],
+    },
+
+    {
+      id: 'v1-40-deux-mains', titre: 'Ode à la joie à deux mains', duree: 35,
+      objectifs: ['Lire une grande portée avec deux mains jouant ensemble.', 'Repérer les notes de basse qui accompagnent la mélodie.', 'Coordonner les deux mains par petits morceaux.'],
+      blocs: [
+        { t: 'p', x: 'Maintenant, la main gauche s’en mêle. On ajoute à l’**Ode à la joie** une **basse très simple** : une note tenue par mesure, qui alterne entre **do** et **sol**. C’est la forme la plus élémentaire d’accompagnement.' },
+        { t: 'score', clef: 'piano', mes: '4/4', arm: 0, haut: 'e4:q e4:q f4:q g4:q | g4:q f4:q e4:q d4:q | c4:q c4:q d4:q e4:q | e4:q. d4:e d4:h || e4:q e4:q f4:q g4:q | g4:q f4:q e4:q d4:q | c4:q c4:q d4:q e4:q | d4:q. c4:e c4:h |]', bas: 'c3:w | g2:w | c3:w | g2:w | c3:w | g2:w | c3:w | g2:h c3:h |]', bpm: 88, legende: 'Ode à la joie, mélodie à la main droite, basse à la main gauche (do – sol – do – sol…).' },
+        { t: 'h', x: 'Lire à deux mains : la méthode' },
+        { t: 'liste', num: true, x: [
+          '**Main droite seule**, jusqu’à ce qu’elle soit sûre (leçon précédente).',
+          '**Main gauche seule** : très simple ici (une note par mesure).',
+          '**Deux mains ensemble, très lentement**, mesure par mesure : d’abord deux mesures, puis quatre, puis la phrase entière.',
+          '**Compter à voix haute** : les deux mains partagent le même temps.',
+        ] },
+        { t: 'rem', tag: 'Règle de la verticalité', x: 'Ce qui est **aligné verticalement** se joue **en même temps**. Le premier temps de la mesure 1 : la main droite joue mi, la main gauche joue do, **ensemble**. Ensuite, la main gauche **tient** son do pendant que la main droite joue quatre noires.' },
+        { t: 'h', x: 'La main gauche : où sont ces notes ?' },
+        { t: 'clavier', de: 36, a: 60, noms: 'tous', marque: ['c3', 'g2'], legende: 'Do 2 (clé de fa : 2ᵉ interligne) et sol 1 (clé de fa : 1re ligne). Doigté main gauche : le 5 (auriculaire) joue la note de basse.' },
+        { t: 'p', x: 'Le **do** de la main gauche s’écrit dans le **2ᵉ interligne** (en comptant du bas) de la clé de fa : **do 2**. Le **sol** est sur la **1re ligne** : **sol 1**. Un doigt de la main gauche, souvent le **5ᵉ** (auriculaire), joue ces basses ; le pouce reste souple pour l’éventuel accompagnement.' },
+        { t: 'qcm', titre: 'Vérifie', questions: [
+          { q: 'Quelle est la note de basse de la 1re mesure ?', choix: ['do', 'ré', 'mi', 'sol'], bonne: 0, expl: 'Do 2, une ronde.' },
+          { q: 'Que signifie un alignement vertical ?', choix: ['Notes jouées l’une après l’autre', 'Notes jouées en même temps', 'Notes identiques', 'Notes liées'], bonne: 1, expl: 'Alignées = simultanées.' },
+          { q: 'Pour apprendre à deux mains, on commence par…', choix: ['Les deux mains ensemble à vitesse normale', 'Chaque main seule, puis lentement ensemble', 'La main gauche seulement', 'Aucune méthode'], bonne: 1, expl: 'Mains séparées, puis ensemble très lentement.' },
+        ] },
+      ],
+      videos: [{ titre: 'Jouer à deux mains', rech: 'piano débutant deux mains coordination ode à la joie accompagnement' }],
+      cartes: [
+        { cat: 'Mélodies', q: 'Comment apprendre un morceau à deux mains ?', r: 'Chaque main seule, puis ensemble très lentement, mesure par mesure, en comptant.' },
+        { cat: 'Mélodies', q: 'Que signifie un alignement vertical sur la grande portée ?', r: 'Les notes se jouent en même temps.' },
+      ],
+    },
+  ],
+});
