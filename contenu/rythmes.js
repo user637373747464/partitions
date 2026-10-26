@@ -9,4 +9,13 @@ Contenu.rythmes = [
   { titre: 'Difficile · 4/4 pointés et doubles-croches', mes: '4/4', bpm: 60, s: 'b4:q. b4:e b4:q b4:q | b4:q b4:s b4:s b4:e b4:q b4:q | b4:e. b4:s b4:q b4:h | b4:w |]' },
   { titre: 'Difficile · 6/8', mes: '6/8', bpm: 96, s: 'b4:q. b4:e b4:e b4:e | b4:q b4:e b4:q b4:e | b4:q. r:q b4:e | b4:q. b4:q. |]' },
   { titre: 'Difficile · 4/4 contretemps', mes: '4/4', bpm: 60, s: 'b4:e b4:q b4:e b4:q b4:q | b4:q r:e b4:e b4:q b4:q | b4:e b4:e b4:q b4:h | b4:w |]' },
+  { titre: 'Moyen · 4/4 syncopes', mes: '4/4', bpm: 66, s: 'b4:e b4:q b4:e b4:q b4:q | b4:q b4:e b4:q b4:e b4:q | b4:e b4:q b4:q b4:e b4:q | b4:w |]' },
+  { titre: 'Moyen · 2/2 (alla breve)', mes: '2/2', bpm: 60, s: 'b4:h b4:h | b4:q b4:q b4:h | b4:h b4:q b4:q | b4:w |]' },
+  { titre: 'Moyen · 3/8', mes: '3/8', bpm: 120, s: 'b4:e b4:e b4:e | b4:q b4:e | b4:s b4:s b4:s b4:s b4:e | b4:q. |]' },
+  { titre: 'Difficile · 4/4 triolets', mes: '4/4', bpm: 60, s: 'b4:q <3 b4:e b4:e b4:e > b4:q b4:q | b4:q b4:q <3 b4:e b4:e b4:e > <3 b4:e b4:e b4:e > | <3 b4:e r:e b4:e > b4:q b4:h | b4:w |]' },
+  { titre: 'Difficile · 9/8', mes: '9/8', bpm: 96, s: 'b4:q. b4:q. b4:q. | b4:q. b4:e b4:e b4:e b4:e b4:e b4:e | b4:h. b4:q. | b4:q. b4:h. |]' },
+  { titre: 'Difficile · 12/8', mes: '12/8', bpm: 88, s: 'b4:q. b4:q. b4:q. b4:q. | b4:q. b4:e b4:e b4:e b4:q. b4:q. | b4:h. b4:q. b4:q. | b4:w. |]' },
+  { titre: 'Expert · 5/4 (3 + 2)', mes: '5/4', bpm: 72, s: 'b4:q b4:q b4:q b4:q b4:q | b4:h b4:q b4:h | b4:q b4:q b4:h b4:q | b4:h. b4:h |]' },
+  { titre: 'Expert · 7/8 (3 + 2 + 2)', mes: '7/8', bpm: 120, s: 'b4:q. b4:q b4:q | b4:q b4:q b4:q. | b4:e b4:e b4:q b4:q. | b4:h b4:q. |]' },
+  { titre: 'Expert · syncopes et doubles-croches', mes: '4/4', bpm: 58, s: 'b4:s b4:e b4:s b4:q b4:q b4:q | b4:e. b4:s b4:q b4:e. b4:s b4:q | b4:e b4:q b4:e b4:s b4:s b4:e b4:q | b4:w |]' },
 ];

@@ -49,6 +49,8 @@ p { line-height: 1.62; margin: 10px 0; font-size: 17px; }
 .lecon .def .tag { font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: 1.1px; color: var(--gris); display: block; margin-top: 6px; }
 .lecon .rem { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 14px 0; color: var(--encre); } .lecon .rem .tag { font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: 1.1px; color: var(--accent); display: block; margin-top: 6px; }
 .lecon ul, .lecon ol { padding-left: 22px; line-height: 1.6; font-size: 17px; margin: 8px 0; } .lecon li { margin: 4px 0; }
+.tabwrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 14px 0; max-width: 100%; }
+.tabwrap table { margin: 0 !important; }
 .lecon table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 15px; font-family: var(--sans); }
 .lecon th, .lecon td { border-bottom: 1px solid var(--trait); padding: 8px 6px; text-align: left; vertical-align: top; } .lecon th { font-weight: 700; border-bottom: 2px solid var(--encre); font-size: 13px; text-transform: uppercase; letter-spacing: .6px; }
 .fig { margin: 18px 0; padding: 12px 8px 8px; border: 1px solid var(--trait); border-radius: 10px; background: var(--surface); text-align: center; position: relative; }
@@ -105,7 +107,7 @@ svg.portee .ev.joue .enc { fill: var(--accent); } svg.portee .ev.joue .pied { st
 .champ { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--trait); background: var(--surface); font-size: 16px; }
 .reg { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 2px; border-bottom: 1px solid var(--trait); font-family: var(--sans); font-size: 15px; } .reg small { display: block; color: var(--gris); font-size: 12.5px; margin-top: 2px; }
 .reg .sw { width: 46px; height: 28px; border-radius: 14px; background: var(--trait); position: relative; flex: none; } .reg .sw i { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--papier); box-shadow: 0 1px 3px #0004; transition: left .15s; } .reg .sw.on { background: var(--encre); } .reg .sw.on i { left: 21px; }
-#toast { position: fixed; left: 50%; bottom: calc(var(--bas-sur) + 76px); transform: translateX(-50%); background: var(--encre); color: var(--papier); padding: 10px 16px; border-radius: 999px; font-family: var(--sans); font-size: 14px; z-index: 20; max-width: 88%; text-align: center; }
+#toast { pointer-events: none; position: fixed; left: 50%; bottom: calc(var(--bas-sur) + 76px); transform: translateX(-50%); background: var(--encre); color: var(--papier); padding: 10px 16px; border-radius: 999px; font-family: var(--sans); font-size: 14px; z-index: 20; max-width: 88%; text-align: center; }
 .sel { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; } .sel button { border: 1px solid var(--trait); border-radius: 999px; padding: 8px 14px; font-family: var(--sans); font-size: 14px; background: var(--surface); } .sel button.on { background: var(--encre); color: var(--papier); border-color: var(--encre); }
 .hr { height: 1px; background: var(--trait); margin: 22px 0; }
 .vide { text-align: center; color: var(--gris); font-family: var(--sans); padding: 30px 10px; }

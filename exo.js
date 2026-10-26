@@ -190,6 +190,7 @@
     }
     function ecouter(q) {
       if (!q.son) return;
+      if (q.seq) { q.seq.forEach((st, k) => setTimeout(() => st.forEach((m) => racine.Son.note(m, q.dureeNote || 1.3, st.length > 2 ? 0.62 : 0.8)), k * (q.pas || 850))); return; }
       if (q.sonSuite || q.son.length > 1) { racine.Son.note(q.son[0], 0.9, 0.85); setTimeout(() => racine.Son.note(q.son[1], 1.1, 0.85), 850); }
       else racine.Son.note(q.son[0], 1.3, 0.85);
     }

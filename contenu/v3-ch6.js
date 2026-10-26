@@ -1,0 +1,268 @@
+/* Volume 3 · Chapitre 6 — Les modes, les pentatoniques et le blues. */
+(function () {
+  const { p, h, def, rem, ex, liste, num, tab, sc, piano, ry, qcm, exo, clav, son, cartes, video, ivs, G, L } = Contenu.o;
+  const T = Theorie, nm = (n) => T.nomFr(n), Mj = (n) => T.Maj(n);
+  const { cap, bar } = G;
+  const MODES = ['ionien', 'dorien', 'phrygien', 'lydien', 'mixolydien', 'eolien', 'locrien'];
+  const NOM = T.MODES_NOMS;
+  // tonalité de la gamme majeure « parente » : on descend de l'intervalle qui sépare la tonique du mode de celle du parent
+  const PARENT = {
+    ionien: (t) => (typeof t === 'string' ? T.parse(t) : t), dorien: (t) => T.descendre(t, 2, 'M'), phrygien: (t) => T.descendre(t, 3, 'M'), lydien: (t) => T.descendre(t, 4, 'J'),
+    mixolydien: (t) => T.descendre(t, 5, 'J'), eolien: (t) => T.descendre(t, 6, 'M'), locrien: (t) => T.descendre(t, 7, 'M'),
+  };
+  const armDe = (t, mode) => T.nbAlterations(T.str(PARENT[mode](t)), 'maj');
+  const modeScore = (t, mode, arm) => bar(T.gammeScore(t, mode, { d: 'q', arm: arm == null ? armDe(t, mode) : arm }), 4);
+  const notes = (t, mode) => T.gamme(t, mode).map(nm).join(' – ');
+  const armTxt = (n) => (n === 0 ? 'aucune altération' : Math.abs(n) + (n > 0 ? ' dièse' : ' bémol') + (Math.abs(n) > 1 ? 's' : ''));
+  const nomParent = (t, mode) => Mj(PARENT[mode](t)) + ' majeur';
+  function blocMode(t, mode, legende) {
+    const arm = armDe(t, mode);
+    return sc(modeScore(t, mode, arm), (legende || cap(nm(T.noteDe ? t : t)) + ' ' + NOM[mode]) , { mes: '4/4', arm });
+  }
+  function carteMode(t, mode, q) {
+    const arm = armDe(t, mode), nomT = Mj(t) + ' ' + NOM[mode];
+    return { cat: 'Modes', q: q || 'Notes de ' + nomT + ' ?', r: notes(t, mode) + '.', p: { clef: 'sol', arm, mes: '4/4', s: modeScore(t, mode, arm) } };
+  }
+
+  Contenu.chapitre('v3', {
+    id: 'v3c6', titre: 'Chapitre 6 · Les modes, pentatoniques et blues',
+    lecons: [
+      L('v3-32-modes', 'Qu’est-ce qu’un mode ?', 35,
+        ['Comprendre qu’un mode est une gamme construite sur un degré d’une autre gamme.', 'Nommer les sept modes à partir des touches blanches.', 'Entendre que la même série de notes change de caractère selon la tonique.'],
+        [
+          p('Jusqu’ici, on a vu **deux** modes : majeur et mineur. Mais ce sont deux cas particuliers d’une famille de **sept modes**, hérités de la musique du Moyen Âge et utilisés aujourd’hui dans le jazz, le rock, le cinéma et la musique folk.'),
+          def('mode', 'Un **mode** est une gamme obtenue en **jouant les mêmes notes qu’une gamme majeure en commençant sur un autre degré**. Chaque degré donne un mode différent, avec sa propre **tonique** et sa propre **couleur**.'),
+          h('Les sept modes sur les touches blanches'),
+          p('Pour commencer, prends les notes blanches du piano et fais-les partir successivement de **do, ré, mi, fa, sol, la, si**. Chaque départ donne un mode.'),
+          tab(['Départ', 'Mode', 'Notes (touches blanches)'], MODES.map((m, i) => [['do', 'ré', 'mi', 'fa', 'sol', 'la', 'si'][i], cap(NOM[m]), T.gamme(['c4', 'd4', 'e4', 'f4', 'g4', 'a4', 'b4'][i], m).map(nm).join(' – ')])),
+          blocMode('c4', 'ionien', 'Do ionien = do majeur.'),
+          blocMode('d4', 'dorien', 'Ré dorien : de ré à ré sur les touches blanches.'),
+          blocMode('e4', 'phrygien', 'Mi phrygien.'),
+          blocMode('f4', 'lydien', 'Fa lydien.'),
+          blocMode('g4', 'mixolydien', 'Sol mixolydien.'),
+          blocMode('a4', 'eolien', 'La éolien = la mineur naturel.'),
+          blocMode('b3', 'locrien', 'Si locrien.'),
+          rem('Deux modes que tu connais déjà', 'Le mode **ionien** est la **gamme majeure**. Le mode **éolien** est la **gamme mineure naturelle**. Les cinq autres modes sont les modes « nouveaux » : **dorien, phrygien, lydien, mixolydien, locrien**.'),
+          h('Même notes, autre couleur'),
+          p('Joue le mode de **ré dorien** puis celui de **do majeur** : tu joues exactement les mêmes touches, mais la musique sonne différemment, parce que la **tonique** (la note de repos) n’est pas la même. C’est l’idée centrale des modes : **la tonique change tout**.'),
+          sc('d4:q e4:q f4:q g4:q | a4:q b4:q c5:q d5:q |]', 'Ré dorien : mêmes touches que do majeur, tonique ré.', { mes: '4/4' }),
+          qcm('Les modes', [
+            ['Un mode est…', ['une gamme construite à partir d’un autre degré d’une gamme majeure', 'un rythme', 'un accord', 'un instrument'], 0, 'Mêmes notes, autre tonique.'],
+            ['Quel mode est identique à la gamme majeure ?', ['ionien', 'dorien', 'lydien', 'locrien'], 0, 'Ionien.'],
+            ['Quel mode est identique à la gamme mineure naturelle ?', ['éolien', 'phrygien', 'mixolydien', 'ionien'], 0, 'Éolien.'],
+            ['Que donne une gamme de touches blanches de ré à ré ?', ['ré dorien', 'ré phrygien', 'ré ionien', 'ré lydien'], 0, 'Dorien (II de do).'],
+            ['Combien de modes dans cette famille ?', ['7', '5', '12', '3'], 0, 'Sept modes.'],
+          ]),
+          exo('mode-reco', { modes: ['ionien', 'dorien', 'phrygien'] }, 6, 'Reconnaître : ionien, dorien ou phrygien ?'),
+        ],
+        { videos: [video('Les modes en musique expliqués simplement', 'les modes en musique dorien phrygien lydien mixolydien expliqués simplement'), video('Les sept modes sur les touches blanches', 'sept modes touches blanches piano ionien dorien phrygien')],
+          mix: [{ gen: 'mode-reco', params: { modes: ['ionien', 'dorien', 'phrygien'] } }],
+          cartes: cartes('Modes', [['Qu’est-ce qu’un mode ?', 'Une gamme construite sur un autre degré d’une gamme majeure.'], ['Combien de modes ?', 'Sept : ionien, dorien, phrygien, lydien, mixolydien, éolien, locrien.'], ['Ionien = ?', 'La gamme majeure.'], ['Éolien = ?', 'La gamme mineure naturelle.'], ['Dorien sur touches blanches ?', 'Ré (de ré à ré).'], ['Phrygien sur touches blanches ?', 'Mi.']]) }),
+
+      L('v3-33-ionien-dorien-phrygien', 'Dorien et phrygien', 35,
+        ['Connaître les formules des modes dorien et phrygien.', 'Les situer par rapport au mineur naturel.', 'Reconnaître leur note caractéristique.'],
+        [
+          p('Les deux premiers modes « nouveaux » sont des **modes mineurs** (tierce mineure), mais avec chacun une particularité.'),
+          h('Le mode dorien'),
+          def('dorien', 'Le **dorien** a pour formule **T ½ T T T ½ T**. C’est un **mineur naturel avec un VI majeur**. Sa note caractéristique est donc la **sixte majeure**.'),
+          sc(modeScore('d4', 'dorien', 0), 'Ré dorien : ré mi fa sol la si do ré (touches blanches).', { mes: '4/4' }),
+          sc(modeScore('d4', 'min', -1), 'Pour comparer — ré mineur naturel : le VI est si♭ (au lieu de si).', { mes: '4/4', arm: -1 }),
+          p('**Écoute la différence** : en dorien, la sixte majeure donne une couleur plus **claire** et plus **ouverte** que le mineur naturel. On l’entend dans *Scarborough Fair* (chanson traditionnelle), dans *So What* (Miles Davis) ou *Eleanor Rigby* (Beatles).'),
+          h('Le mode phrygien'),
+          def('phrygien', 'Le **phrygien** a pour formule **½ T T T ½ T T**. C’est un **mineur naturel avec un II abaissé** : un **demi-ton** entre la tonique et le 2ᵉ degré. Sa note caractéristique est la **seconde mineure**.'),
+          sc(modeScore('e4', 'phrygien', 0), 'Mi phrygien : mi fa sol la si do ré mi (touches blanches).', { mes: '4/4' }),
+          sc(bar(T.gammeScore('e4', 'min', { d: 'q', arm: 1 }), 4), 'Pour comparer — mi mineur naturel : le II est fa♯ (au lieu de fa).', { mes: '4/4', arm: 1 }),
+          p('Le phrygien est le mode de la **tension** et du **drame** : on y entend un « soupir » mi–fa en haut de la tonique. C’est la couleur du **flamenco** (la « cadence andalouse », la–sol–fa–mi) et de nombreuses musiques espagnoles ou du heavy metal.'),
+          h('Tableau comparatif'),
+          tab(['Mode', 'Formule', 'Par rapport au mineur naturel', 'Note caractéristique'], [['Dorien', 'T ½ T T T ½ T', 'VI relevé (♮6)', 'sixte majeure'], ['Éolien (mineur naturel)', 'T ½ T T ½ T T', '—', 'sixte mineure'], ['Phrygien', '½ T T T ½ T T', 'II abaissé (♭2)', 'seconde mineure']]),
+          rem('Pour retenir', 'Les trois modes mineurs se rangent du plus **clair** au plus **sombre** : **dorien** (VI majeur) → **éolien** (mineur naturel) → **phrygien** (II mineur). Plus on abaisse de degrés, plus la couleur est sombre.'),
+          qcm('Dorien et phrygien', [
+            ['Le dorien est un mineur naturel avec…', ['VI majeur', 'II mineur', 'IV augmenté', 'VII majeur'], 0, 'VI majeur.'],
+            ['Le phrygien est un mineur naturel avec…', ['II mineur', 'VI majeur', 'IV augmenté', 'VII majeur'], 0, 'II mineur (demi-ton après la tonique).'],
+            ['Ré dorien contient…', ['si naturel', 'si♭', 'fa♯', 'do♯'], 0, 'Touches blanches : si naturel.'],
+            ['Mi phrygien contient…', ['fa naturel', 'fa♯', 'ré♯', 'sol♯'], 0, 'Touches blanches : fa naturel.'],
+            ['Dans lequel de ces modes entend-on la « cadence andalouse » ?', ['phrygien', 'dorien', 'lydien', 'ionien'], 0, 'La–sol–fa–mi.'],
+          ]),
+          exo('mode-reco', { modes: ['dorien', 'phrygien', 'eolien'] }, 8, 'Dorien, phrygien ou éolien ?'),
+          exo('mode-ecoute', { modes: ['dorien', 'phrygien', 'eolien'] }, 6, 'À l’oreille'),
+        ],
+        { videos: [video('Mode dorien : explication et exemples', 'mode dorien explication exemples So What Scarborough Fair'), video('Mode phrygien et flamenco', 'mode phrygien flamenco cadence andalouse explication')],
+          mix: [{ gen: 'mode-reco', params: { modes: ['dorien', 'phrygien', 'eolien'] } }],
+          cartes: cartes('Modes', [['Formule du dorien ?', 'T ½ T T T ½ T.'], ['Formule du phrygien ?', '½ T T T ½ T T.'], ['Dorien = mineur naturel avec… ?', 'VI majeur.'], ['Phrygien = mineur naturel avec… ?', 'II mineur (♭2).'], ['Mélodie en dorien ?', 'Scarborough Fair, So What, Eleanor Rigby.'], ['Couleur du phrygien ?', 'Tendue, espagnole (flamenco).']]).concat([carteMode('d4', 'dorien'), carteMode('e4', 'phrygien')]) }),
+
+      L('v3-34-lydien-mixolydien', 'Lydien et mixolydien', 35,
+        ['Connaître les formules des modes lydien et mixolydien.', 'Les situer par rapport à la gamme majeure.', 'Reconnaître leur note caractéristique.'],
+        [
+          p('Les deux modes suivants sont des **modes majeurs** (tierce majeure), avec chacun un degré qui change.'),
+          h('Le mode lydien'),
+          def('lydien', 'Le **lydien** a pour formule **T T T ½ T T ½**. C’est une **gamme majeure avec un IV augmenté** (quarte augmentée au-dessus de la tonique). Sa note caractéristique est le **IV relevé**.'),
+          sc(modeScore('f4', 'lydien', 0), 'Fa lydien : fa sol la si do ré mi fa (touches blanches : le si naturel est le IV augmenté).', { mes: '4/4' }),
+          sc(bar(T.gammeScore('f4', 'maj', { d: 'q', arm: -1 }), 4), 'Pour comparer — fa majeur : le IV est si♭ (au lieu de si).', { mes: '4/4', arm: -1 }),
+          p('Le lydien sonne **lumineux, rêveur, suspendu** (la quarte augmentée est un « triton » au-dessus de la tonique). On le reconnaît dans le **générique des Simpson**, dans la musique d’*E.T.* (le thème « Flying ») ou *Dreams* (Fleetwood Mac).'),
+          h('Le mode mixolydien'),
+          def('mixolydien', 'Le **mixolydien** a pour formule **T T ½ T T ½ T**. C’est une **gamme majeure avec un VII abaissé** (septième mineure au-dessus de la tonique). Sa note caractéristique est la **septième mineure**.'),
+          sc(modeScore('g4', 'mixolydien', 0), 'Sol mixolydien : sol la si do ré mi fa sol (touches blanches : le fa naturel est le VII abaissé).', { mes: '4/4' }),
+          sc(bar(T.gammeScore('g4', 'maj', { d: 'q', arm: 1 }), 4), 'Pour comparer — sol majeur : le VII est fa♯ (sensible).', { mes: '4/4', arm: 1 }),
+          p('Le mixolydien sonne **majeur mais sans sensible** : il est « terrien », détendu, un peu blues. Il règne dans le **rock** et la **folk** : *Norwegian Wood* (Beatles), *Sweet Home Alabama* ou les cornemuses écossaises.'),
+          h('Tableau comparatif'),
+          tab(['Mode', 'Formule', 'Par rapport au majeur', 'Note caractéristique'], [['Lydien', 'T T T ½ T T ½', 'IV relevé (♯4)', 'quarte augmentée'], ['Ionien (majeur)', 'T T ½ T T T ½', '—', 'quarte juste, septième majeure'], ['Mixolydien', 'T T ½ T T ½ T', 'VII abaissé (♭7)', 'septième mineure']]),
+          rem('Pour retenir', 'Les trois modes majeurs se rangent du plus **lumineux** au moins **lumineux** : **lydien** (♯4) → **ionien** (majeur) → **mixolydien** (♭7).'),
+          qcm('Lydien et mixolydien', [
+            ['Le lydien est un majeur avec…', ['IV relevé', 'VII abaissé', 'II abaissé', 'VI majeur'], 0, '♯4.'],
+            ['Le mixolydien est un majeur avec…', ['VII abaissé', 'IV relevé', 'III mineur', 'VI mineur'], 0, '♭7.'],
+            ['Fa lydien contient…', ['si naturel', 'si♭', 'mi♭', 'fa♯'], 0, 'Touches blanches.'],
+            ['Sol mixolydien contient…', ['fa naturel', 'fa♯', 'si♭', 'mi♭'], 0, 'Touches blanches.'],
+            ['Le générique des Simpson est en…', ['lydien', 'mixolydien', 'phrygien', 'dorien'], 0, 'Quarte augmentée dès le début.'],
+          ]),
+          exo('mode-reco', { modes: ['lydien', 'ionien', 'mixolydien'] }, 8, 'Lydien, ionien ou mixolydien ?'),
+          exo('mode-ecoute', { modes: ['lydien', 'ionien', 'mixolydien'] }, 6, 'À l’oreille'),
+        ],
+        { videos: [video('Mode lydien : le son des Simpson', 'mode lydien explication Simpson E.T. quarte augmentée'), video('Mode mixolydien : rock et folk', 'mode mixolydien explication rock folk Norwegian Wood septième mineure')],
+          mix: [{ gen: 'mode-reco', params: { modes: ['lydien', 'ionien', 'mixolydien'] } }],
+          cartes: cartes('Modes', [['Formule du lydien ?', 'T T T ½ T T ½.'], ['Formule du mixolydien ?', 'T T ½ T T ½ T.'], ['Lydien = majeur avec… ?', 'IV relevé (♯4).'], ['Mixolydien = majeur avec… ?', 'VII abaissé (♭7).'], ['Lydien : exemples ?', 'Les Simpson, E.T. (Flying), Dreams.'], ['Mixolydien : exemples ?', 'Norwegian Wood, Sweet Home Alabama, folk et cornemuse.']]).concat([carteMode('f4', 'lydien'), carteMode('g4', 'mixolydien')]) }),
+
+      L('v3-35-eolien-locrien', 'Éolien et locrien', 30,
+        ['Reconnaître l’éolien comme mineur naturel.', 'Connaître le locrien et sa quinte diminuée.', 'Savoir pourquoi le locrien est instable et rare.'],
+        [
+          h('Le mode éolien : le mineur naturel'),
+          p('Le mode **éolien** (formule **T ½ T T ½ T T**) est exactement la **gamme mineure naturelle** que tu connais déjà. Il règne dans la pop, le rock, la folk et une grande partie de la musique « triste » moderne.'),
+          sc(modeScore('a4', 'eolien', 0), 'La éolien = la mineur naturel.', { mes: '4/4' }),
+          h('Le mode locrien'),
+          def('locrien', 'Le **locrien** a pour formule **½ T T ½ T T T**. C’est la gamme construite sur le **VII** de la gamme majeure. Il a un **II mineur** et surtout une **quinte diminuée** (♭5) au-dessus de la tonique : l’intervalle de **triton** entre la tonique et la quinte.'),
+          sc(modeScore('b3', 'locrien', 0), 'Si locrien : si do ré mi fa sol la si (touches blanches). La quinte si–fa est un triton.', { mes: '4/4' }),
+          p('Parce que la tonique et sa quinte forment un triton, le locrien est **très instable** : l’accord de tonique (si–ré–fa) est un accord **diminué**, qui ne donne aucun sentiment de repos. On l’utilise donc **rarement comme tonalité** ; mais on le rencontre dans le **jazz** (accord demi-diminué) et dans le **métal** (la gamme sert de couleur sombre).'),
+          rem('Pourquoi le locrien est-il à part ?', 'Les six autres modes ont une **quinte juste** avec la tonique, ce qui permet de construire un accord parfait stable. Le locrien est le seul mode dont la quinte est **diminuée** : il ne peut pas être une « maison » stable pour la mélodie.'),
+          h('Récapitulatif : les sept modes'),
+          tab(['Mode', 'Formule', 'Tierce', 'Altération caractéristique'], [['Ionien', 'T T ½ T T T ½', 'majeure', '—'], ['Dorien', 'T ½ T T T ½ T', 'mineure', 'VI majeur'], ['Phrygien', '½ T T T ½ T T', 'mineure', 'II mineur'], ['Lydien', 'T T T ½ T T ½', 'majeure', 'IV augmenté'], ['Mixolydien', 'T T ½ T T ½ T', 'majeure', 'VII mineur'], ['Éolien', 'T ½ T T ½ T T', 'mineure', 'VI et VII mineurs'], ['Locrien', '½ T T ½ T T T', 'mineure', 'II mineur et V diminuée']]),
+          qcm('Éolien et locrien', [
+            ['Le mode éolien est identique à…', ['la gamme mineure naturelle', 'la gamme mineure harmonique', 'la gamme majeure', 'la gamme chromatique'], 0, 'Éolien = mineur naturel.'],
+            ['Quel intervalle caractérise le locrien ?', ['quinte diminuée', 'quarte augmentée', 'sixte majeure', 'septième majeure'], 0, 'Triton tonique–quinte.'],
+            ['Si locrien (touches blanches) commence sur…', ['si', 'do', 'la', 'mi'], 0, 'Si.'],
+            ['Pourquoi le locrien est-il rare ?', ['sa tonique est instable (accord diminué)', 'il est trop aigu', 'il n’existe pas', 'il est trop facile'], 0, 'L’accord de tonique est diminué.'],
+            ['Quel mode contient une tierce majeure ?', ['lydien', 'dorien', 'phrygien', 'locrien'], 0, 'Ionien, lydien et mixolydien.'],
+          ]),
+          exo('mode-reco', { modes: ['eolien', 'locrien', 'phrygien'] }, 8, 'Éolien, locrien ou phrygien ?'),
+          exo('mode-reco', { modes: MODES }, 10, 'Série complète : les sept modes'),
+        ],
+        { videos: [video('Mode locrien expliqué', 'mode locrien explication quinte diminuée instable jazz'), video('Les sept modes récapitulatif', 'les sept modes récapitulatif ionien dorien phrygien lydien mixolydien éolien locrien')],
+          mix: [{ gen: 'mode-reco', params: { modes: MODES } }],
+          cartes: cartes('Modes', [['Formule du locrien ?', '½ T T ½ T T T.'], ['Caractéristique du locrien ?', 'Quinte diminuée (♭5) et II mineur.'], ['Pourquoi le locrien est-il rare ?', 'Son accord de tonique est diminué (instable).'], ['Éolien = ?', 'Mineur naturel.'], ['Quels modes ont une tierce majeure ?', 'Ionien, lydien, mixolydien.'], ['Quels modes ont une tierce mineure ?', 'Dorien, phrygien, éolien, locrien.']]).concat([carteMode('b3', 'locrien')]) }),
+
+      L('v3-36-construire-mode', 'Construire un mode sur n’importe quelle note', 40,
+        ['Construire un mode sur une tonique quelconque.', 'Utiliser la gamme majeure « parente ».', 'Utiliser les altérations caractéristiques à partir du majeur ou du mineur.'],
+        [
+          p('Les modes sur les touches blanches sont faciles. Mais pour jouer **ré♭ dorien** ou **sol♯ phrygien**, il faut une méthode. Deux méthodes équivalentes :'),
+          h('Méthode 1 : la gamme majeure parente'),
+          p('Chaque mode est le **degré k** d’une gamme majeure. Pour trouver les notes d’un mode sur la tonique X, cherche **la gamme majeure dont X est le degré k**, puis joue-la en commençant sur X.'),
+          tab(['Mode', 'Degré parent', 'La gamme parente est…', 'Exemple'], MODES.map((m, i) => [cap(NOM[m]), ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'][i], ['la même (tonique X)', 'à un ton sous X', 'à une tierce majeure sous X', 'à une quarte juste sous X', 'à une quinte juste sous X', 'à une sixte majeure sous X', 'à une septième majeure sous X'][i], 'Sol ' + NOM[m] + ' → ' + nomParent('g4', m)])),
+          p('**Exemple** : sol dorien. Sol est le II de fa majeur → on joue la gamme de fa majeure de sol à sol : sol la si♭ do ré mi fa sol.'),
+          blocMode('g4', 'dorien', 'Sol dorien (armure de fa majeur : si♭).'),
+          h('Méthode 2 : les altérations caractéristiques'),
+          tab(['Mode', 'À partir du…', 'Altérations'], [['Dorien', 'mineur naturel', 'VI relevé (♮6)'], ['Phrygien', 'mineur naturel', 'II abaissé (♭2)'], ['Locrien', 'mineur naturel', '♭2 et ♭5'], ['Lydien', 'majeur', 'IV relevé (♯4)'], ['Mixolydien', 'majeur', 'VII abaissé (♭7)']]),
+          p('**Exemple** : do mixolydien = do majeur avec VII abaissé → do ré mi fa sol la **si♭** do. **Exemple** : fa♯ phrygien = fa♯ mineur naturel (fa♯ sol♯ la si do♯ ré mi) avec II abaissé → fa♯ **sol** la si do♯ ré mi.'),
+          blocMode('c4', 'mixolydien', 'Do mixolydien = do majeur avec si♭ (armure de fa majeur).'),
+          blocMode('f4', 'phrygien', 'Fa phrygien : fa sol♭ la♭ si♭ do ré♭ mi♭ (armure de ré♭ majeur, 5 bémols).'),
+          rem('Contrôle', 'Quelle que soit la méthode, vérifie que la gamme contient **chaque lettre une seule fois** et que la formule en tons et demi-tons correspond bien. Si tu hésites, joue-la au piano : l’oreille confirme.'),
+          qcm('Construire', [
+            ['Notes de sol dorien ?', ['sol la si♭ do ré mi fa', 'sol la si do ré mi fa', 'sol la si♭ do ré mi♭ fa', 'sol la♭ si♭ do ré mi fa'], 0, 'Parent : fa majeur.'],
+            ['Notes de do mixolydien ?', ['do ré mi fa sol la si♭', 'do ré mi♭ fa sol la si♭', 'do ré mi fa sol la si', 'do ré mi fa♯ sol la si'], 0, 'Majeur avec VII abaissé.'],
+            ['Gamme parente de ré phrygien ?', ['si♭ majeur', 'do majeur', 'fa majeur', 'la majeur'], 0, 'Ré est le III de si♭.'],
+            ['Gamme parente de la lydien ?', ['mi majeur', 'ré majeur', 'sol majeur', 'do majeur'], 0, 'La est le IV de mi.'],
+            ['Notes de mi lydien ?', ['mi fa♯ sol♯ la♯ si do♯ ré♯', 'mi fa♯ sol♯ la si do♯ ré♯', 'mi fa sol la si do ré', 'mi fa♯ sol la♯ si do♯ ré'], 0, 'Majeur avec IV relevé (la♯).'],
+          ]),
+          exo('mode-reco', { modes: MODES }, 10, 'Reconnaître le mode (tonique variée)'),
+        ],
+        { videos: [video('Construire un mode sur n’importe quelle note', 'construire un mode sur une note gamme parente dorien lydien piano'), video('Modes : méthode des altérations', 'modes altérations caractéristiques majeur mineur méthode')],
+          mix: [{ gen: 'mode-reco', params: { modes: MODES } }],
+          cartes: cartes('Modes', [['Méthode 1 pour construire un mode ?', 'Trouver la gamme majeure parente dont la tonique est le degré k.'], ['Méthode 2 pour construire un mode ?', 'Partir du majeur ou du mineur et appliquer l’altération caractéristique.'], ['Sol dorien ?', 'Sol la si♭ do ré mi fa (parent : fa majeur).'], ['Do mixolydien ?', 'Do ré mi fa sol la si♭.'], ['Ré phrygien ?', 'Ré mi♭ fa sol la si♭ do (parent : si♭ majeur).'], ['La lydien ?', 'La si do♯ ré♯ mi fa♯ sol♯ (parent : mi majeur).']]).concat([carteMode('g4', 'dorien')]) }),
+
+      L('v3-37-couleur', 'La couleur des modes : du plus clair au plus sombre', 35,
+        ['Ranger les sept modes de la lumière à l’ombre.', 'Reconnaître un mode à l’oreille.', 'Associer chaque mode à un style ou une ambiance.'],
+        [
+          p('Chaque mode a une **couleur** propre. On peut les ranger sur une échelle de **luminosité**, selon le nombre d’altérations abaissées par rapport à la gamme majeure :'),
+          tab(['Mode', 'Altérations vs majeur', 'Ambiance', 'Exemples'], [
+            ['Lydien', '♯4', 'lumineux, rêveur, féerique', 'Simpson, E.T.'],
+            ['Ionien (majeur)', '—', 'joyeux, stable', 'comptines, pop'],
+            ['Mixolydien', '♭7', 'détendu, terrien, bluesy', 'rock, folk, cornemuse'],
+            ['Dorien', '♭3 ♭7', 'mineur mais ouvert, cool', 'jazz modal, Scarborough Fair'],
+            ['Éolien (mineur naturel)', '♭3 ♭6 ♭7', 'mélancolique', 'pop-rock, ballades'],
+            ['Phrygien', '♭2 ♭3 ♭6 ♭7', 'tendu, espagnol', 'flamenco, metal'],
+            ['Locrien', '♭2 ♭3 ♭5 ♭6 ♭7', 'instable, inquiétant', 'jazz (accord demi-diminué)'],
+          ]),
+          rem('Le truc des modes à ouvrir et fermer', 'En allant du lydien au locrien, **on abaisse un degré de plus à chaque fois** : ♯4 → rien → ♭7 → ♭3 → ♭6 → ♭2 → ♭5. Les degrés abaissés successivement sont IV, VII, III, VI, II, V : sur les notes de do, ce sont fa, si, mi, la, ré, sol — la suite des bémols à l’armure (si, mi, la, ré, sol), précédée du fa.'),
+          h('Une tonique, sept couleurs'),
+          p('Pour sentir ces couleurs, joue **sur la même tonique** (par exemple do) les sept modes l’un après l’autre. Voici les sept modes de do :'),
+          ...MODES.map((m) => sc(modeScore('c4', m), 'Do ' + NOM[m] + ' : ' + notes('c4', m), { mes: '4/4', arm: armDe('c4', m) })),
+          h('S’entraîner à l’oreille'),
+          exo('mode-ecoute', { modes: ['ionien', 'dorien', 'eolien'] }, 6, 'Niveau 1 : ionien, dorien, éolien'),
+          exo('mode-ecoute', { modes: ['lydien', 'ionien', 'mixolydien', 'dorien'] }, 8, 'Niveau 2 : lydien, ionien, mixolydien, dorien'),
+          exo('mode-ecoute', { modes: MODES }, 10, 'Niveau 3 : les sept modes'),
+          qcm('Couleurs', [
+            ['Le mode le plus lumineux est…', ['lydien', 'ionien', 'dorien', 'phrygien'], 0, '♯4.'],
+            ['Le mode le plus sombre est…', ['locrien', 'phrygien', 'éolien', 'dorien'], 0, 'Cinq altérations abaissées.'],
+            ['Le dorien est…', ['un mineur ouvert', 'un majeur sombre', 'un mode instable', 'un mode de touches noires'], 0, 'Tierce mineure, sixte majeure.'],
+            ['Quel mode est typique du flamenco ?', ['phrygien', 'dorien', 'lydien', 'ionien'], 0, 'Cadence andalouse.'],
+            ['Quel mode a la septième mineure et la tierce majeure ?', ['mixolydien', 'ionien', 'lydien', 'dorien'], 0, 'Mixolydien.'],
+          ]),
+        ],
+        { videos: [video('Les modes du plus clair au plus sombre', 'modes du plus clair au plus sombre lydien ionien mixolydien dorien éolien phrygien locrien'), video('Écouter les sept modes sur do', 'les 7 modes sur do piano écouter couleur')],
+          mix: [{ gen: 'mode-ecoute', params: { modes: MODES } }],
+          cartes: cartes('Modes', [['Mode le plus lumineux ?', 'Le lydien (♯4).'], ['Mode le plus sombre ?', 'Le locrien.'], ['Ordre de luminosité ?', 'Lydien, ionien, mixolydien, dorien, éolien, phrygien, locrien.'], ['Le dorien est…', 'Un mineur avec sixte majeure : couleur ouverte.'], ['Le mixolydien est…', 'Un majeur avec septième mineure : terrien, bluesy.']]) }),
+
+      L('v3-38-pentatonique-blues', 'Pentatoniques et gamme blues', 40,
+        ['Construire et jouer les gammes pentatoniques majeure et mineure.', 'Ajouter la « blue note » pour obtenir la gamme blues.', 'Reconnaître la pentatonique sur les touches noires.'],
+        [
+          p('Une gamme **pentatonique** n’a que **cinq notes** (penta = cinq). Elle est la base de la musique de nombreux peuples (Chine, Écosse, Afrique de l’Ouest…) et du blues et du rock. Elle est aussi **très facile à improviser**, car aucune note n’est « fausse ».'),
+          h('Pentatonique majeure'),
+          def('pentatonique majeure', 'On l’obtient en **supprimant** de la gamme majeure les degrés **IV et VII** (ceux qui forment des demi-tons). Il reste **I – II – III – V – VI**. Formule : **T T 1½ T 1½**.'),
+          sc('c4:q d4:q e4:q g4:q | a4:h c5:h |]', 'Do pentatonique majeur : do – ré – mi – sol – la (puis do).', { mes: '4/4' }),
+          clav('c4', 'c5', { noms: 'tous', marque: ['c4', 'd4', 'e4', 'g4', 'a4', 'c5'], legende: 'Do pentatonique majeur : cinq touches blanches sur sept (on saute fa et si).' }),
+          h('Pentatonique mineure'),
+          def('pentatonique mineure', 'On la déduit de la gamme **mineure naturelle** en supprimant les degrés **II et VI**. Il reste **I – III – IV – V – VII**. Formule : **1½ T T 1½ T**. C’est la **relative** de la pentatonique majeure : mêmes notes, tonique différente.'),
+          sc('a3:q c4:q d4:q e4:q | g4:h a4:h |]', 'La pentatonique mineure : la – do – ré – mi – sol (puis la). Mêmes notes que do pentatonique majeur.', { mes: '4/4' }),
+          h('La gamme blues'),
+          def('gamme blues', 'La gamme **blues** (mineure) est la pentatonique mineure à laquelle on ajoute la **« blue note »** : le **V abaissé** (quinte diminuée). Elle compte six notes : **I – ♭III – IV – ♭V – V – ♭VII**.'),
+          sc('a3:q c4:q d4:q eb4:q | e4:q g4:q a4:h |]', 'La blues : la – do – ré – mi♭ – mi – sol – la. La blue note (mi♭) donne la teinte « sale » typique du blues.', { mes: '4/4' }),
+          h('Et sur les touches noires ?'),
+          p('Si tu joues **uniquement les cinq touches noires** (fa♯ sol♯ la♯ do♯ ré♯), tu obtiens la pentatonique de **fa♯ majeur** (ou de **ré♯ mineur**). Essaie : n’importe quelle improvisation sonne bien, car aucune note n’est dissonante !'),
+          clav('f3', 'g4', { noms: false, marque: ['f#3', 'g#3', 'a#3', 'c#4', 'd#4'], legende: 'Les cinq touches noires : pentatonique de fa♯ majeur.' }),
+          rem('À toi de jouer', 'Prends une pentatonique mineure (la – do – ré – mi – sol) et **improvise** : un rythme simple à la main gauche (la répété), et la main droite qui joue ces cinq notes dans l’ordre que tu veux. Tu fais déjà du blues !'),
+          qcm('Pentatoniques', [
+            ['Combien de notes dans une pentatonique ?', ['5', '6', '7', '12'], 0, 'Penta = 5.'],
+            ['Do pentatonique majeur ?', ['do ré mi sol la', 'do ré fa sol la', 'do mi fa sol si', 'do ré mi fa sol'], 0, 'Sans IV ni VII.'],
+            ['La pentatonique mineure de la ?', ['la do ré mi sol', 'la si do mi fa', 'la do mi fa sol', 'la si do ré mi'], 0, 'Relative de do pentatonique.'],
+            ['La blue note est…', ['le V abaissé', 'le II abaissé', 'le VII relevé', 'le IV abaissé'], 0, '♭5 (quinte diminuée).'],
+            ['Quelle gamme joue-t-on sur les cinq touches noires ?', ['pentatonique', 'chromatique', 'harmonique', 'mixolydienne'], 0, 'Fa♯ pentatonique majeur.'],
+          ]),
+        ],
+        { videos: [video('Les gammes pentatoniques', 'gammes pentatoniques majeure mineure piano explication'), video('La gamme blues au piano', 'gamme blues piano blue note pentatonique mineure improviser')],
+          mix: [],
+          cartes: cartes('Gammes', [['Pentatonique majeure : quels degrés ?', 'I II III V VI (sans IV ni VII).'], ['Pentatonique mineure : quels degrés ?', 'I ♭III IV V ♭VII (sans II ni VI).'], ['Gamme blues ?', 'Pentatonique mineure + ♭V (blue note).'], ['Do pentatonique majeur ?', 'Do ré mi sol la.'], ['La pentatonique mineure ?', 'La do ré mi sol.'], ['Que joue-t-on sur les cinq touches noires ?', 'La pentatonique de fa♯ majeur.']]) }),
+
+      L('v3-39-atelier-modes', 'Atelier : modes et gammes', 35,
+        ['Consolider les modes, les formes du mineur et les pentatoniques.', 'Enchaîner des séries d’exercices variées.', 'Préparer la synthèse du volume.'],
+        [
+          p('Atelier de synthèse du chapitre. Fais chaque série sans te presser : une série réussie à plus de 80 % est un bon signe.'),
+          h('Série 1 · Reconnaître le mode'),
+          exo('mode-reco', { modes: MODES }, 10, 'Les sept modes'),
+          h('Série 2 · Oreille'),
+          exo('mode-ecoute', { modes: ['dorien', 'phrygien', 'lydien', 'mixolydien'] }, 8, 'Modes à l’oreille'),
+          h('Série 3 · Les gammes mineures'),
+          exo('gamme-reco', { types: ['min', 'harm', 'mel'], max: 6 }, 10, 'Naturel, harmonique ou mélodique'),
+          exo('gamme-degre', { types: ['min', 'harm', 'mel'], max: 6, degres: [6, 7] }, 8, 'VI et VII selon la forme'),
+          h('Série 4 · Intervalles'),
+          exo('interv-q', { nums: [2, 3, 4, 5, 6, 7], quals: ['M', 'm', 'J', 'A', 'd'], alt: true }, 10, 'Intervalles'),
+          qcm('Quiz final du chapitre', [
+            ['Quel mode contient une quinte diminuée ?', ['locrien', 'phrygien', 'dorien', 'lydien'], 0, 'Locrien (♭5).'],
+            ['Sol dorien est la gamme de…', ['fa majeur à partir de sol', 'sol majeur', 'sol mineur harmonique', 'ré majeur à partir de sol'], 0, 'Fa majeur parent.'],
+            ['Pentatonique mineure de mi ?', ['mi sol la si ré', 'mi fa♯ sol la si', 'mi sol la si do', 'mi fa sol la si'], 0, 'I ♭III IV V ♭VII.'],
+            ['Quelle gamme mineure contient une seconde augmentée ?', ['harmonique', 'naturelle', 'mélodique ascendante', 'dorienne'], 0, 'VI–VII = 1½ ton.'],
+            ['Mode de la cadence andalouse ?', ['phrygien', 'lydien', 'ionien', 'dorien'], 0, 'La–sol–fa–mi.'],
+          ]),
+        ],
+        { videos: [video('Exercices sur les modes', 'exercices sur les modes dorien lydien phrygien formation musicale'), video('Quiz gammes et modes', 'quiz gammes modes piano théorie musicale')],
+          mix: [{ gen: 'mode-reco', params: { modes: MODES } }, { gen: 'gamme-reco', params: { types: ['min', 'harm', 'mel'], max: 6 } }],
+          cartes: cartes('Modes', [['Mode avec quinte diminuée ?', 'Locrien.'], ['Sol dorien : gamme parente ?', 'Fa majeur.'], ['Quel mode pour la cadence andalouse ?', 'Phrygien.'], ['Pentatonique mineure de mi ?', 'Mi sol la si ré.']]) }),
+    ],
+  });
+})();
